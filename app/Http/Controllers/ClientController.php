@@ -12,7 +12,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.client.index', ['clients' => Client::all()]);
     }
 
     /**
@@ -20,7 +20,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.client.form');
     }
 
     /**
@@ -28,7 +28,17 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'nom' => ['string', 'required'],
+            'prenom' => ['string', 'required'],
+            'telephone' => ['string', 'required'],
+            'adresse' => ['string', 'required'],
+            'sexe' => ['string', 'required'],
+        ]);
+
+        Client::create($validate);
+
+        return to_route('client.index')->with('success', 'client ajouter');
     }
 
     /**
@@ -36,7 +46,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        // return view('admin.client.form-edit', compact('client'));
     }
 
     /**
@@ -44,7 +54,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('admin.client.form-edit', compact('client'));
     }
 
     /**
@@ -52,7 +62,17 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $validate = $request->validate([
+            'nom' => ['string', 'required'],
+            'prenom' => ['string', 'required'],
+            'telephone' => ['string', 'required'],
+            'adresse' => ['string', 'required'],
+            'sexe' => ['string', 'required'],
+        ]);
+
+        $client->update($validate);
+
+        return to_route('client.index')->with('success', 'client modifier');
     }
 
     /**
@@ -60,6 +80,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+        return redirect()->back();
     }
 }
