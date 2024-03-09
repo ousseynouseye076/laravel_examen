@@ -20,17 +20,24 @@
                 @csrf
 
                 <div class="form-group mb-3">
-                    <label class="label-control mb-2" for='titre'><strong>Titre</strong></label>
-                    <input class="form-control" name="titre" value="{{ old('titre') }}" type="text" required id="titre">
+                    <label class="label-control mb-2" for='name'><strong>Nom</strong></label>
+                    <input class="form-control" name="nom" value="{{ old('name') }}" type="text" required id="nom">
                 </div>
                 <div class="form-group mb-3">
-                    <label class="label-control mb-2" for='titre'><strong>Titre</strong></label>
-                    <input class="form-control" name="titre" value="{{ old('titre') }}" type="text" required id="titre">
+                    <label class="label-control mb-2" for='description'><strong>Desription</strong></label>
+                    <input class="form-control" name="description" value="{{ old('description') }}" type="text" required id="description">
                 </div>
 
                 <div class="form-group mb-3">
-                    <label class="label-control mb-2" for='titre'><strong>Titre</strong></label>
-                    <input class="form-control" name="titre" value="{{ old('titre') }}" type="text" required id="titre">
+                    <label class="label-control mb-2" for='prix'><strong>Prix</strong></label>
+                    <input class="form-control" name="prix" value="{{ old('titre') }}" type="number" required id="prix">
+                </div>
+                <div class="form-group mb-3">
+                    <label class="label-control mb-2" for='photo'><strong>Photo</strong></label>
+                    <input class="form-control" name="photo" value="{{ old('photo') }}" type="file" required id="photo">
+                    @error('photo')
+                        <span>{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-3">
