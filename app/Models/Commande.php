@@ -9,12 +9,14 @@ class Commande extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      * Get the client that owns the Commande
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function client(): BelongsTo
+    public function client()
     {
         return $this->belongsTo(Client::class);
     }
@@ -24,7 +26,7 @@ class Commande extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function produit(): BelongsTo
+    public function produit()
     {
         return $this->belongsTo(Produit::class);
     }

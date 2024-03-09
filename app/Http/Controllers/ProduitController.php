@@ -16,6 +16,13 @@ class ProduitController extends Controller
         return view('admin.produit.index', ['produits' => Produit::all() ]);
     }
 
+    public function liste()
+    {
+        return view('produit.list',
+        ['produits' => Produit::with('category')->get()]
+    );
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -31,7 +38,11 @@ class ProduitController extends Controller
     public function store(Request $request)
     {
         $produit = $request->validate([
-            'titre' => ['string', 'required']
+            'nom' => 'required|string',
+            'description' => 'required|string',
+            'quantite' => 'required|integer',
+            'category_id' => 'required',
+            'prix' => 'required|integer',
         ]);
 
         Produit::create($produit);
@@ -52,10 +63,14 @@ class ProduitController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Produit $Produit)
+    public function update(Request $request, Produit $produit)
     {
         $validate = $request->validate([
-            'titre' => ['string', 'required']
+            'nom' => 'required|string',
+            'description' => 'required|string',
+            'quantite' => 'required|integer',
+            'category_id' => 'required',
+            'prix' => 'required|integer',
         ]);
 
         $produit->update($validate);

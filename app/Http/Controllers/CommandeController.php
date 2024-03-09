@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Commande;
+use App\Models\Produit;
 use Illuminate\Http\Request;
 
 class CommandeController extends Controller
@@ -18,9 +20,10 @@ class CommandeController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Produit $produit)
     {
-        //
+        $clients = Client::all();
+        return view('commande.form', compact('produit', 'clients'));
     }
 
     /**
@@ -28,7 +31,23 @@ class CommandeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate(
+            [
+                'client_id' => ['required', 'integer'],
+                'produit_id' => ['required', 'integer'],
+                'quantite_achete' => ['required', 'integer']
+                ]
+        );
+
+        Commande::create($validate);
+
+        $produit = Produit::find($validate['produit_id']);
+
+        $new_quantity = $produit->quantite - $validate['quantite_achete'];
+
+        $produit->update(['quantite' => $new_quantity]);
+
+        return to_route('produits.liste')->with('success', 'commande effectuer');
     }
 
     /**

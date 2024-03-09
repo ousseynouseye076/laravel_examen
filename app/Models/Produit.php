@@ -9,12 +9,14 @@ class Produit extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      * Get the category that owns the Produit
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category(): BelongsTo
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
@@ -24,7 +26,7 @@ class Produit extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function commandes(): HasMany
+    public function commandes()
     {
         return $this->hasMany(Commande::class);
     }

@@ -19,9 +19,7 @@ use App\Http\Controllers\CommandeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ProduitController::class, 'liste']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -33,14 +31,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/produits', [ProduitController::class, 'liste'])->name('produits.liste');
+
 Route::middleware(['auth'])->group(function () {
 
     Route::resource('user', UserController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('produit', ProduitController::class);
     Route::resource('client', ClientController::class);
-    Route::resource('commande', CommandeController::class);
+    Route::get('/produit/{produit}/commande',[CommandeController::class, 'create'] )->name('commande.create');
+    Route::post('/commande', [CommandeController::class, 'store'])->name('commande.store');
+
 
 })->name('admin.');
+
 
 require __DIR__.'/auth.php';

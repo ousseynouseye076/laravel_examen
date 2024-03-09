@@ -9,15 +9,17 @@ class Client extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      * Get all of the commandes for the Client
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function commandes(): HasMany
+    public function commandes()
     {
         return $this->hasMany(Commande::class);
     }
 
-    
+
 }

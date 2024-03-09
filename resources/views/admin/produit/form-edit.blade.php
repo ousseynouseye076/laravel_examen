@@ -22,7 +22,9 @@
 
                 <div class="form-group mb-3">
                     <label class="label-control mb-2" for='titre'><strong>Titre</strong></label>
-                    <input class="form-control" name="titre" value="{{ old('titre', $category->titre) }}" type="text" required id="titre">
+                    <input class="form-control" name="titre"
+                    value="{{ old('titre', $category->titre) }}"
+                    type="text" required id="titre">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Modifier</button>
