@@ -73,3 +73,4 @@ class ProduitController extends Controller
         return redirect()->back()->with('success', 'Produit supprimer');
     }
 }
+
